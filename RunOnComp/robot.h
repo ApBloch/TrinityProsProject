@@ -2,7 +2,6 @@
 #define ROBOT_H_
 
 //to use this file copy < #include "robot.h" > to the top of main.cpp
-#include "api.h"
 
 //define Port numbers for the motors here so we can use them later
 #define LEFT_FRONT 4
@@ -12,11 +11,7 @@
 #define VISION_PORT 1
 
 //if you want to use the same motors elsewhere in the project extern the motors
-//extern means the variable/class is defined in another file in our calse "robot.cpp"
-extern pros::Motor lFront;
-extern pros::Motor rFront;
-extern pros::Motor lBack;
-extern pros::Motor rBack; 
+//extern means the variable/class is defined in another file in our case "robot.cpp"
 
 //pros::ADIGyro gyro(1);
 
@@ -31,13 +26,13 @@ class name
   private:        //private stuff can only be accessed inside the class ie the brackets
     int value;    //values that are specific to this object
     int value2;
-  public:                 //public can be accessed anywhere
-    name();               //constructor sets up how to call the object elsewhere in the code
-    name(int x);          //another constructor
-    name(int x, int y);   //another another constructor
+  public:         //public can be accessed anywhere
+    name(){}      //constructor sets up how to call the object elsewhere in the code
+    name(int x): value(x){}                     //another constructor
+    name(int x, int y): value(x), value2(y){}   //another another constructor
 
-    void function(int x);    //function with input int x
-    int function();          //function that output a int
+    void function(int x)    //function with input int x
+    int function()          //function that output a int
 
 };   //notice the semicolon
 =============================================================================
@@ -59,6 +54,7 @@ class Robot{
         void set_length(int l);
         int get_wheel_diameter();
         void moveForward(int speed);
+        float calculate_area();
 };
 
 #endif /* ROBOT_H_*/
