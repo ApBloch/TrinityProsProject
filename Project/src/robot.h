@@ -5,20 +5,11 @@
 #include "api.h"
 
 //define Port numbers for the motors here so we can use them later
-#define LEFT_FRONT 4
-#define RIGHT_FRONT 5
-#define LEFT_BACK 3
-#define RIGHT_BACK 2
+#define FRONT_LEFT_PORT 4
+#define FRONT_RIGHT_PORT 5
+#define BACK_LEFT_PORT 3
+#define BACK_RIGHT_PORT 2
 #define VISION_PORT 1
-
-//if you want to use the same motors elsewhere in the project extern the motors
-//extern means the variable/class is defined in another file in our calse "robot.cpp"
-extern pros::Motor lFront;
-extern pros::Motor rFront;
-extern pros::Motor lBack;
-extern pros::Motor rBack; 
-
-//pros::ADIGyro gyro(1);
 
 /*
 =============================================================================
@@ -59,6 +50,13 @@ class Robot{
         void set_length(int l);
         int get_wheel_diameter();
         void moveForward(int speed);
+
+        void tankDrive(int leftJoystick, int rightJoystick);
+
+        pros::Motor leftFront;
+        pros::Motor rightFront;
+        pros::Motor leftBack;
+        pros::Motor rightBack;
 };
 
 #endif /* ROBOT_H_*/

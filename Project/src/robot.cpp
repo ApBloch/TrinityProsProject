@@ -12,18 +12,21 @@ returnType Classname::function(argument){
 }
 ************************************************************************************************/
 
-//initialize motors
-pros::Motor lFront (LEFT_FRONT);
-pros::Motor rFront (RIGHT_FRONT, true);
-pros::Motor lBack (LEFT_BACK);
-pros::Motor rBack (RIGHT_BACK, true);
-
 //setup constructor robot
-Robot::Robot(){
-}
+Robot::Robot()  
+    : leftFront(FRONT_LEFT_PORT)    //setup motors
+    , rightFront(FRONT_RIGHT_PORT, true)
+    , leftBack(BACK_LEFT_PORT)
+    , rightBack(BACK_RIGHT_PORT, true)
+{}
 
 //setup constructor 2 for robot
-Robot::Robot(int d, int w, int l){
+Robot::Robot(int d, int w, int l)
+    : leftFront(FRONT_LEFT_PORT)    //setup motors
+    , rightFront(FRONT_RIGHT_PORT, true)
+    , leftBack(BACK_LEFT_PORT)
+    , rightBack(BACK_RIGHT_PORT, true)
+{
     wheel_diameter = d;
     width = w;
     length = l;
@@ -109,10 +112,10 @@ Robot::Robot(int d, int w, int l){
       =====================================================================================================
       */
     void Robot::moveForward(int speed){
-        lFront.move(speed);
-        rFront.move(speed);
-        lBack.move(speed);
-        rBack.move(speed);
+        leftFront.move(speed);
+        rightFront.move(speed);
+        leftBack.move(speed);
+        rightBack.move(speed);
     }
 
       /*==============================================================================================
@@ -161,4 +164,30 @@ Robot::Robot(int d, int w, int l){
       Description: drives the robot a set distance and speed
       Hint use the previous two functions to more accurately drive the distance 
       =====================================================================================================
+      */      
+     
+     /*==============================================================================================
+      Function tankDrive
+      type: void
+      name: tankDrive
+      arguments: int leftJoystick, int rightJoystick
+      Description: set right motors to right joystick, sets left motors to left joystick
+      =====================================================================================================
       */
+     void Robot::tankDrive(int leftJoystick, int rightJoystick){
+        leftFront.move(leftJoystick);
+        rightFront.move(rightJoystick);
+        leftBack.move(leftJoystick);
+        rightBack.move(rightJoystick);
+     }
+
+     /*==============================================================================================
+      Function diffDrive
+      type: void
+      name: diffDrive
+      arguments: int joystickY, int joystickX
+      Description: Mixes joystick x and y to drive motors with one joystick
+      Hint: Combine the joysticks together using math drive motors properly
+      =====================================================================================================
+      */
+

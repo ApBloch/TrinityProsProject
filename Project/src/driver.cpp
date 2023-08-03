@@ -15,14 +15,15 @@
  * task, not resume it from where it left off.
  */
 
+using namespace pros;
+
 void opcontrol() {
 	Robot bot;
+	Controller controller(E_CONTROLLER_MASTER);
 	while (true) {
-		bot.moveForward(20);
-        printf("Move Forward!\r\n");
-		pros::delay(3000);
-		bot.moveForward(-20);
-        printf("Move Backward!\r\n");
-		pros::delay(3000);
+		int joyRight = controller.get_analog(E_CONTROLLER_ANALOG_RIGHT_Y);
+		int joyLeft = controller.get_analog(E_CONTROLLER_ANALOG_LEFT_Y);
+		bot.tankDrive(joyLeft, joyRight);
+		delay(10);	//add small delay to slow update loop
 	}
 }
